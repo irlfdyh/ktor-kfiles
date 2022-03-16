@@ -33,4 +33,5 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 
     implementation(files("libs/poi-5.2.1.jar"))
+    implementation(files("libs/poi-ooxml-5.2.1.jar"))
 }
