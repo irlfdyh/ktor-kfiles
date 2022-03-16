@@ -39,6 +39,21 @@ fun Application.basicFileRoute() {
                     call.respond(e.message.toString())
                 }
             }
+            delete("/upload/{filename}") {
+                val filename = call.parameters["filename"] ?: "unknown"
+                try {
+                    val file = File("uploads/$filename")
+                    file.delete().let { succeed ->
+                        if (succeed) {
+                            call.respond("file removed")
+                        } else {
+                            call.respond("failed when remove file")
+                        }
+                    }
+                } catch (e: Exception) {
+                    call.respond(e.message.toString())
+                }
+            }
         }
     }
 }
