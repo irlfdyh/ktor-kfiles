@@ -1,12 +1,12 @@
 package com.plygrnd.ktor.kfiles.route
 
+import com.plygrnd.ktor.kfiles.entity.User
 import com.plygrnd.ktor.kfiles.poi.readExcelFile
 import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.apache.poi.hssf.usermodel.HSSFSheet
 import java.io.File
 
 fun Application.poiFileRoute() {
@@ -16,6 +16,7 @@ fun Application.poiFileRoute() {
         route("/poi") {
             post("/read") {
                 val multipartData = call.receiveMultipart()
+                val users = mutableListOf<User>()
 
                 multipartData.forEachPart { part ->
                     when (part) {
@@ -27,14 +28,14 @@ fun Application.poiFileRoute() {
                             val fileBytes = part.streamProvider().readBytes()
                             File("uploads/$filename").writeBytes(fileBytes).let {
                                 val uploadedFile = File("uploads/$filename")
-                                readExcelFile(uploadedFile)
+                                users.addAll(readExcelFile(uploadedFile))
                             }
 
                         }
                         else -> Unit
                     }
                 }
-                call.respond("$fileDescription is uploaded to 'uploads/$filename'")
+                call.respond(users)
             }
         }
     }

@@ -32,6 +32,12 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 
-    implementation(files("libs/poi-5.2.1.jar"))
-    implementation(files("libs/poi-ooxml-5.2.1.jar"))
+    implementation("commons-io:commons-io:2.11.0")
+    implementation("org.apache.xmlbeans:xmlbeans:5.0.3")
+    implementation("org.apache.commons:commons-collections4:4.4")
+    implementation("org.apache.commons:commons-compress:1.21")
+    implementation("org.apache.poi:poi:5.2.2")
+    implementation("org.apache.poi:poi-ooxml:5.2.2")
+    implementation("org.apache.poi:poi-ooxml-full:5.2.2")
+    implementation("org.apache.poi:poi-ooxml-schemas:4.1.2")
 }
